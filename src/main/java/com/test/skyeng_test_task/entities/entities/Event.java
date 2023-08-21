@@ -40,7 +40,7 @@ public class Event extends BaseEntity {
         this.postOffice = postOffice;
         this.postalItem = postalItem;
         this.type = type;
-        if (type.equals(EventType.ARRIVAL_TO_POST_OFFICE)) {
+        if (type.equals(EventType.ARRIVED_AT_THE_POST_OFFICE)) {
             this.activeStatus = true;
         }
         super.created = LocalDateTime.now();

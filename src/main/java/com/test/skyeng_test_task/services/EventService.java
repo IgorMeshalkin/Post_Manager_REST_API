@@ -30,7 +30,7 @@ public class EventService {
             PostalItem postalItem = postalItemRepository.findById(postalItemId).orElse(null);
             PostOffice postOffice = postOfficeRepository.findById(postOfficeId).orElse(null);
             if (postalItem != null && postOffice != null) {
-                Event event = new Event(postOffice, postalItem, EventType.ARRIVAL_TO_POST_OFFICE);
+                Event event = new Event(postOffice, postalItem, EventType.ARRIVED_AT_THE_POST_OFFICE);
                 return eventRepository.save(event);
             } else {
                 return null;
@@ -49,7 +49,7 @@ public class EventService {
 
             PostalItem postalItem = postalItemRepository.findById(postalItemId).orElse(null);
             PostOffice postOffice = postOfficeRepository.findById(postOfficeId).orElse(null);
-            Event newLeavingEvent = new Event(postOffice, postalItem, EventType.LEAVING_FROM_POST_OFFICE);
+            Event newLeavingEvent = new Event(postOffice, postalItem, EventType.LEFT_POST_OFFICE);
             return eventRepository.save(newLeavingEvent);
         } else {
             return null;
@@ -62,7 +62,7 @@ public class EventService {
         Event deliveredEvent = eventRepository.findDeliveredEvent(postalItemId);
         if (lastActiveEvent == null && deliveredEvent == null) {
             PostalItem postalItem = postalItemRepository.findById(postalItemId).orElse(null);
-            Event newDeliveryEvent = new Event(null, postalItem, EventType.DELIVERY_TO_RECIPIENT);
+            Event newDeliveryEvent = new Event(null, postalItem, EventType.DELIVERED);
             return eventRepository.save(newDeliveryEvent);
         } else {
             return null;
