@@ -1,0 +1,1 @@
+TRUNCATE TABLE events, postal_items RESTART IDENTITY;
