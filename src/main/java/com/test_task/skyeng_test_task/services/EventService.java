@@ -35,7 +35,7 @@ public class EventService {
                 Event event = new Event(postOffice, postalItem, EventType.ARRIVED_AT_THE_POST_OFFICE);
                 return eventRepository.save(event);
             } else {
-                throw new IncorrectValuesException("PostOffice with id = " + postOfficeId  + " or PostalItem with id = " + postalItemId + " not found in database");
+                throw new IncorrectValuesException("PostOffice with id = " + postOfficeId + " or PostalItem with id = " + postalItemId + " not found in database");
             }
         } else {
             throw new PostItemAlreadyTakenException("PostalItem with id = " + postalItemId + " is already delivered to the recipient or don't left from last PostOffice and can't be arrival to next PostOffice.");

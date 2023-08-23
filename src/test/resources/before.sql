@@ -14,7 +14,9 @@ values (null, 1, 'REGISTRATION', null, current_timestamp, current_timestamp),
        (3, 3, 'ARRIVED_AT_THE_POST_OFFICE', true, current_timestamp, current_timestamp),
        (3, 2, 'ARRIVED_AT_THE_POST_OFFICE', true, current_timestamp, current_timestamp);
 
-update events set active_status = false where id = 5;
+update events
+set active_status = false
+where id = 5;
 
 insert into events (post_office_id, postal_item_id, type, active_status, created, last_updated)
 values (3, 2, 'LEFT_POST_OFFICE', null, current_timestamp, current_timestamp);

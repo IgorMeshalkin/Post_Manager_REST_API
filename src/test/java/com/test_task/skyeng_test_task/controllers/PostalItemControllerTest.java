@@ -39,12 +39,12 @@ public class PostalItemControllerTest {
     @Test
     void registrationNewPostalItem() throws Exception {
         mockMvc.perform(post("/api/postal_items")
-                        .content(objectMapper.writeValueAsString(PostalItemTestUtil.getPostalItemForRegistrationTest()))
+                        .content(objectMapper.writeValueAsString(PostalItemTestUtil.getPostalItemForControllerRegistrationTest()))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(4))
-                .andExpect(jsonPath("$.recipientName").value("Имя теста регистрации"))
-                .andExpect(jsonPath("$.recipientAddress").value("Адрес теста регистрации"))
+                .andExpect(jsonPath("$.recipientName").value("Имя получателя тестового отправления"))
+                .andExpect(jsonPath("$.recipientAddress").value("Адрес тестового отправления"))
                 .andExpect(jsonPath("$.events.length()").value(1));
     }
 }

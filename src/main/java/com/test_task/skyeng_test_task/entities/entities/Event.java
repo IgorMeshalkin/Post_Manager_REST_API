@@ -2,9 +2,9 @@ package com.test_task.skyeng_test_task.entities.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.test_task.skyeng_test_task.services.EventService;
 import com.test_task.skyeng_test_task.entities.BaseEntity;
 import com.test_task.skyeng_test_task.entities.entity_types.EventType;
+import com.test_task.skyeng_test_task.services.EventService;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
