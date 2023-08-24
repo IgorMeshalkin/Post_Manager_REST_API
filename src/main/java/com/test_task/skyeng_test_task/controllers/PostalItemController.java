@@ -20,6 +20,7 @@ public class PostalItemController {
     @GetMapping
     @Operation(summary = "${description.get-postal-item}")
     public ResponseEntity<PostalItemDTO> getByTrackNumber(@RequestParam String trackNumber) {
+        //Receives trackNumber and call PostalItemService to looking for PostalItem with this track number.
         PostalItem result = postalItemService.getByTrackNumber(trackNumber);
         if (result != null) {
             return new ResponseEntity<>(PostalItemDTO.getFromPostalItem(result), HttpStatus.OK);
@@ -31,6 +32,7 @@ public class PostalItemController {
     @PostMapping
     @Operation(summary = "${description.registration-postal-item}")
     public ResponseEntity<PostalItemDTO> registrationNewPostalItem(@RequestBody PostalItem postalItem) {
+        //Receives PostalItem object and call PostalItemService to registration this object in the system.
         PostalItem registeredPostalItem = postalItemService.registrationNewPostalItem(postalItem);
         PostalItemDTO result = PostalItemDTO.getFromPostalItem(registeredPostalItem);
         return new ResponseEntity<>(result, HttpStatus.OK);

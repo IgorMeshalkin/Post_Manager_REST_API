@@ -24,6 +24,7 @@ public class EventController {
     @PostMapping("/arrival/{postOfficeId}/{postalItemId}")
     @Operation(summary = "${description.arrival-event}")
     public ResponseEntity<Event> arrival(@PathVariable Long postOfficeId, @PathVariable Long postalItemId) {
+        //Receives postOfficeId and postalItemId and call EventService for make new 'ARRIVED_AT_THE_POST_OFFICE' event.
         try {
             Event result = eventService.arrival(postOfficeId, postalItemId);
             return new ResponseEntity<>(result, HttpStatus.OK);
@@ -37,6 +38,7 @@ public class EventController {
     @PostMapping("/leaving/{postOfficeId}/{postalItemId}")
     @Operation(summary = "${description.leaving-event}")
     public ResponseEntity<Event> leaving(@PathVariable Long postOfficeId, @PathVariable Long postalItemId) {
+        //Receives postOfficeId and postalItemId and call EventService for make new 'LEFT_POST_OFFICE' event.
         try {
             Event result = eventService.leaving(postOfficeId, postalItemId);
             return new ResponseEntity<>(result, HttpStatus.OK);
@@ -50,6 +52,7 @@ public class EventController {
     @PostMapping("/delivery/{postalItemId}")
     @Operation(summary = "${description.delivery-event}")
     public ResponseEntity<Event> delivery(@PathVariable Long postalItemId) {
+        //Receives postalItemId and call EventService for make new 'DELIVERED' event.
         try {
             Event result = eventService.delivery(postalItemId);
             return new ResponseEntity<>(result, HttpStatus.OK);

@@ -26,9 +26,11 @@ public class EventService {
 
     @Transactional
     public Event arrival(Long postOfficeId, Long postalItemId) throws PostItemAlreadyTakenException, IncorrectValuesException {
+        //Check PostalItem with id = received postalItemId is not in the any postOffice or not already delivered.
         Event lastActiveEvent = eventRepository.findArrivaledActiveEvent(postalItemId);
         Event deliveredEvent = eventRepository.findDeliveredEvent(postalItemId);
         if (lastActiveEvent == null && deliveredEvent == null) {
+            //Check received postalItemId and postOfficeId exist in the database.
             PostalItem postalItem = postalItemRepository.findById(postalItemId).orElse(null);
             PostOffice postOffice = postOfficeRepository.findById(postOfficeId).orElse(null);
             if (postalItem != null && postOffice != null) {
@@ -44,11 +46,11 @@ public class EventService {
 
     @Transactional
     public Event leaving(Long postOfficeId, Long postalItemId) throws IncorrectValuesException {
+        //Check PostalItem with id = received postalItemId exist in the PostOffice with id = postOfficeId.
         Event lastActiveEvent = eventRepository.findArrivaledActiveEvent(postalItemId);
         if (lastActiveEvent != null && lastActiveEvent.getPostOffice().getId().equals(postOfficeId)) {
             lastActiveEvent.setActiveStatus(false);
             eventRepository.save(lastActiveEvent);
-
             PostalItem postalItem = postalItemRepository.findById(postalItemId).orElse(null);
             PostOffice postOffice = postOfficeRepository.findById(postOfficeId).orElse(null);
             Event newLeavingEvent = new Event(postOffice, postalItem, EventType.LEFT_POST_OFFICE);
@@ -60,6 +62,7 @@ public class EventService {
 
     @Transactional
     public Event delivery(Long postalItemId) throws PostItemAlreadyTakenException {
+        //Check PostalItem with id = received postalItemId is not in the any postOffice or not already delivered.
         Event lastActiveEvent = eventRepository.findArrivaledActiveEvent(postalItemId);
         Event deliveredEvent = eventRepository.findDeliveredEvent(postalItemId);
         if (lastActiveEvent == null && deliveredEvent == null) {

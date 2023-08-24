@@ -29,7 +29,8 @@ public class PostalItemControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void getByTrackNumber() throws Exception {
+    void getByTrackNumber_correct_value() throws Exception {
+        //Test getting PostalItem by correct track number.
         mockMvc.perform(get("/api/postal_items?trackNumber=PP23081613224633"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.recipientName").value("Сергеев Сергей"))
@@ -37,7 +38,15 @@ public class PostalItemControllerTest {
     }
 
     @Test
+    void getByTrackNumber_incorrect_value() throws Exception {
+        //Test getting PostalItem by incorrect track number.
+        mockMvc.perform(get("/api/postal_items?trackNumber=PP23081613224636"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     void registrationNewPostalItem() throws Exception {
+        //Test registration new PostalItem.
         mockMvc.perform(post("/api/postal_items")
                         .content(objectMapper.writeValueAsString(PostalItemTestUtil.getPostalItemForControllerRegistrationTest()))
                         .contentType(MediaType.APPLICATION_JSON))
